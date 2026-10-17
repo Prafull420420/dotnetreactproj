@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Application.Activities.Queries.GetActivityList).Assembly));
 var app = builder.Build();
 app.UseCors(opt =>
 {
@@ -36,7 +37,10 @@ catch (Exception ex)
 }
 
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
 app.UseAuthorization();
 
