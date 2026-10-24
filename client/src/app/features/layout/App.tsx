@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
-import './App.css'
-import { ListItem, ListItemText, Typography } from '@mui/material';
-import List from '@mui/icons-material/List';
+import axios from 'axios';
+import { Container, CssBaseline, List, ListItem, ListItemText, Typography } from '@mui/material';
+import Navbar from './Navbar';
+import ActivityDashboard from '../Dashboard/ActivityDashboard';
 
 function App() {
   const title= "Welcome to Reactivities";
@@ -14,18 +15,15 @@ function App() {
   }, []);
   return (
     <>
-    <div>
+    <CssBaseline />
+    <Navbar />
+   
       <Typography variant="h1" >
         {title}
       </Typography>
-      <List>
-        {activities.map((activity) => (
-          <ListItem key={activity.id}>
-            <ListItemText primary={activity.title} />
-          </ListItem>
-        ))}
-      </List>
-     </div>
+  <Container maxWidth='xl' sx ={{ mt: 3}}>
+    <ActivityDashboard activities={activities} />
+    </Container>
     </>
   )
 }

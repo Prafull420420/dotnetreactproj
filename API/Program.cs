@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddAutoMapper(cfg => { }, typeof(Application.Core.MappingProfile).Assembly);
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Application.Activities.Queries.GetActivityList).Assembly));
 var app = builder.Build();
 app.UseCors(opt =>
